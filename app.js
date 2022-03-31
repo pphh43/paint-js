@@ -6,7 +6,8 @@ canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
 
 // canvas MDN document : https://developer.mozilla.org/ko/docs/Web/API/Canvas_API
  const ctx = canvas.getContext("2d");
- ctx.strokeStyle = "#2c2c2c";
+ const INITIAL_COLOR = "#2c2c2c"
+ ctx.strokeStyle = INITIAL_COLOR;
  ctx.lineWidth = 2.5;
 
  let painting = false;
@@ -37,6 +38,13 @@ canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
     canvas.addEventListener("mousedown", startPainting);
     canvas.addEventListener("mouseup",stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
+    canvas.addEventListener("click", handleCanvasClick);
+ }
+
+ function handleCanvasClick() {
+     if(filling) {
+        ctx.fillRect(0,0, canvas.width, canvas.height);
+     }
  }
 
 //////  Change Color
@@ -50,6 +58,7 @@ function handleColorClick(event) {
     const color = event.target.style.backgroundColor;
     // console.log(color)
     ctx.strokeStyle = color;
+    ctx.fillStyle = color;
 }
 
 ////// Change Stroke Width
@@ -65,3 +74,25 @@ function handleRangeChange(event) {
     const storkeSize = event.target.value;
     ctx.lineWidth = storkeSize;
 }
+
+///// Filling Mode
+let filling = false;
+
+const mode = document.getElementById("jsMode")
+if (mode) {
+    mode.addEventListener("click", handleModeClick);
+}
+function handleModeClick() {
+    if(filling === true) {
+        filling = false;
+        mode.innerText = "Fill";
+        
+    } else {
+        filling = true;
+        mode.innerText = "Paint";
+    }//Change button text
+}
+// ctx.fillRect(30,20,60,40); //사각형 생성
+// ctx.fillStyle = "green"; //fill color 지정
+
+
