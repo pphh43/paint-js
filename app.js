@@ -30,6 +30,11 @@ canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
  }
  function startPainting(event) {
     painting = true;
+    
+    if(filling) {
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        console.log(ctx.fillStyle);
+    }
  }
  function stopPainting() {
      painting = false;
@@ -85,10 +90,6 @@ function handleModeClick() {
 // ctx.fillStyle = "green"; //fill color 지정
 
 function handleCanvasClick() {
-    if(filling) {
-        ctx.fillRect(0,0,canvas.width, canvas.height);
-        console.log(ctx.fillStyle);
-    }
 }
 
 ////// SAVE IMAGE
@@ -111,13 +112,13 @@ function handleRightClick(event) {
     0
 
 
-    
+
   }
 if (canvas) {
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mousedown", startPainting);
     canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
-    canvas.addEventListener("click", handleCanvasClick);
+    // canvas.addEventListener("click", handleCanvasClick); //-->fill mode에서 drag로 painting 가능 -> painting true일 때만 실행하도록 변경 
     canvas.addEventListener("contextmenu", handleRightClick);
   }
