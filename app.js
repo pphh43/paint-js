@@ -6,9 +6,12 @@ canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
 
 // canvas MDN document : https://developer.mozilla.org/ko/docs/Web/API/Canvas_API
  const ctx = canvas.getContext("2d");
+
  const INITIAL_COLOR = "#2c2c2c"
  ctx.strokeStyle = INITIAL_COLOR;
  ctx.lineWidth = 2.5;
+ ctx.fillStyle = "white";
+ ctx.fillRect(0,0,canvas.width, canvas.height);
 
  let painting = false;
 
@@ -31,20 +34,6 @@ canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
  function stopPainting() {
      painting = false;
     //  console.log('stop painting')
- }
-
- if (canvas) {
-    canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mousedown", startPainting);
-    canvas.addEventListener("mouseup",stopPainting);
-    canvas.addEventListener("mouseleave", stopPainting);
-    canvas.addEventListener("click", handleCanvasClick);
- }
-
- function handleCanvasClick() {
-     if(filling) {
-        ctx.fillRect(0,0, canvas.width, canvas.height);
-     }
  }
 
 //////  Change Color
@@ -95,4 +84,9 @@ function handleModeClick() {
 // ctx.fillRect(30,20,60,40); //사각형 생성
 // ctx.fillStyle = "green"; //fill color 지정
 
-
+function handleCanvasClick() {
+    if(filling) {
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        console.log(ctx.fillStyle);
+    }
+}
