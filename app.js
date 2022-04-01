@@ -90,3 +90,34 @@ function handleCanvasClick() {
         console.log(ctx.fillStyle);
     }
 }
+
+////// SAVE IMAGE
+const saveBtn = document.getElementById("jsSave");
+
+
+function handleRightClick(event) {
+    event.preventDefault();
+  }//우클릭 방지
+
+ if (saveBtn) {
+    saveBtn.addEventListener("click", handleSaveClick);
+ }
+ function handleSaveClick() {
+    const image = canvas.toDataURL(); //image data --> URL
+    const link = document.createElement("a");// create link
+    link.href = image;//image data 값 href 지정
+    link.download = "내가그린기린그림🎨"; //a 태그 download 속성 사용
+    link.click();//JS로 클릭 조종
+    0
+
+
+    
+  }
+if (canvas) {
+    canvas.addEventListener("mousemove", onMouseMove);
+    canvas.addEventListener("mousedown", startPainting);
+    canvas.addEventListener("mouseup", stopPainting);
+    canvas.addEventListener("mouseleave", stopPainting);
+    canvas.addEventListener("click", handleCanvasClick);
+    canvas.addEventListener("contextmenu", handleRightClick);
+  }
